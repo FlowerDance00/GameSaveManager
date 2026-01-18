@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GameSaveManager (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "GameSaveManager (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

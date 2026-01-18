@@ -1,0 +1,99 @@
+<Window
+    x:Class="GameSaveManager.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Game Save Manager">
+
+    <Grid Padding="16" ColumnSpacing="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left: game list -->
+        <StackPanel Grid.Column="0" Spacing="12">
+            <TextBlock Text="Games" FontSize="20" FontWeight="SemiBold"/>
+            <Button x:Name="BtnAddGame" Content="Add Game (Manual)" />
+            <ListView x:Name="GameListView" Height="560">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Padding="8" Spacing="4">
+                            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding SavePath}" Opacity="0.7" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding LastBackupTime}" Opacity="0.7"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <!-- Right: detail -->
+        <!-- Right: detail -->
+        <!-- Right: detail -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            
+            <StackPanel Spacing="12">
+                <TextBlock Text="Details" FontSize="20" FontWeight="SemiBold"/>
+
+                <TextBlock x:Name="TxtSelectedGame"
+                   Text="Select a game on the left."
+                   FontSize="16"
+                   FontWeight="SemiBold"/>
+
+                <TextBlock Text="Save Folder"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox x:Name="TxtSavePath"
+                     Width="600"
+                     IsReadOnly="False"
+                     PlaceholderText="Example: %DOCUMENTS%\My Games\GameX or C:\Path\To\Saves"/>
+                    <Button x:Name="BtnPickSaveFolder" Content="Choose" />
+                    <Button x:Name="BtnSaveSaveFolder" Content="Save" />
+                </StackPanel>
+
+                <TextBlock Text="Backup Root Folder" Margin="0,12,0,0"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox x:Name="TxtBackupRoot"
+                     Width="600"
+                     PlaceholderText="Example: D:\GameBackups"/>
+                    <Button x:Name="BtnSaveBackupRoot" Content="Save" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
+                    <ToggleSwitch x:Name="TglAutoBackup" Header="Auto backup on app startup" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0">
+                    <Button x:Name="BtnBackupNow" Content="Backup Now" Click="BtnBackupNow_Click"/>
+                    <TextBlock x:Name="TxtBackupStatus"
+               Text="Ready"
+               Opacity="0.7"
+               VerticalAlignment="Center"
+               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <TextBlock Text="Recent Backups" Margin="0,12,0,0"/>
+                <ListView x:Name="BackupListView" Height="260"/>
+
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                    <Button x:Name="BtnOpenBackupFolder" Content="Open Backup Folder" />
+                    <Button x:Name="BtnRestoreSelected" Content="Restore Selected" />
+                    <Button x:Name="BtnRestoreLatest" Content="Restore Latest" />
+                    <TextBlock x:Name="TxtRestoreHint" Text="" Opacity="0.7" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock Text="Config" Margin="0,16,0,0" FontWeight="SemiBold"/>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox x:Name="TxtConfigPath"
+             Width="600"
+             IsReadOnly="True"
+             PlaceholderText="Config path will appear here"/>
+                    <Button x:Name="BtnOpenConfigFolder"
+            Content="Open Config Folder"
+            Click="BtnOpenConfigFolder_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
